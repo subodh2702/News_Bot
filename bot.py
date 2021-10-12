@@ -3,12 +3,6 @@ import json
 import requests
 
 
-def speak(str):
-    from win32com.client import Dispatch
-    speak = Dispatch("SAPI.SpVoice")
-    speak.Speak(str)
-
-
 client = discord.Client()
 
 with open('Keys.txt') as f:
@@ -30,8 +24,6 @@ async def on_message(message):
 
     if message.content.startswith('!getnews'):
         await message.channel.send("I'm fetching the latest news for you just hang on! :)")
-        str = "I'm fetching the latest news for you just hang on"
-        speak(str)
 
         for i in range(5):
             await message.channel.send(get_news(i))
