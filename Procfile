@@ -1,1 +1,0 @@
-worker: python News_bot.py
