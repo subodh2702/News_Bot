@@ -4,7 +4,7 @@ import requests
 from Summarizer import ret_summary
 
 def get_news(i):
-    url = 'https://newsapi.org/v2/top-headlines?country=in&apiKey=c0fd563717c54a578e354ed58cf03f58'
+    url = 'https://newsapi.org/v2/top-headlines?country=in&apiKey= YOUR_API_KEY'
     response = requests.get(url)
 
     json_data = json.loads(response.text)
