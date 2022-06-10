@@ -1,15 +1,7 @@
 import discord
-import json
-import requests
 
-
+from fetchnews import get_news
 client = discord.Client()
-
-with open('Keys.txt') as f:
-    lines = f.readlines()
-
-token = lines[0]
-api_id = lines[1]
 
 
 @client.event
@@ -22,23 +14,11 @@ async def on_message(message):
     if message.author == client.user:  # to ignore the msg sent by the bot itself.
         return
 
-    if message.content.startswith('!getnews'):
-        await message.channel.send("I'm fetching the latest news for you just hang on! :)")
+    if message.content.startswith('!summary'):
+        await message.channel.send("I'm fetching the latest news articles and summarizing them for you just hang on! " + ("\U0001F600"))
 
-        for i in range(5):
+        for i in range(20):
             await message.channel.send(get_news(i))
 
 
-def get_news(i):
-    url = 'https://newsapi.org/v2/top-headlines?country=in&apiKey={}'.format(api_id)
-    response = requests.get(url)
-
-    json_data = json.loads(response.text)
-    value = str(i + 1) + ('\n' + (json_data["articles"][i]["title"]) + '\nSource : ' + (
-        json_data["articles"][i]["source"]["name"]) + '\nRead at : ' + (
-                              json_data["articles"][i]["url"]) + '\nPublished At : ' + (
-                          json_data["articles"][i]["publishedAt"]))
-    return value
-
-
-client.run(token)
+client.run('OTg0MzQyMzAyMjIwNzc5NTYw.GX1TtB.VKBJ8C8KdwydXFdw-dKP0iO9v2hlNHr2m4N4Es')
